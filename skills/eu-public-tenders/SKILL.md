@@ -9,11 +9,14 @@ Uses the `eu-tenders-scraper` Apify Actor by Artificially, which reads the offic
 
 ## Setup
 
-The runner needs an Apify API token in the `APIFY_TOKEN` environment variable (or a logged-in Apify CLI). If it is missing, tell the user to create a free account at https://console.apify.com/sign-up and copy the token from Settings > API & Integrations.
+The runner needs one of two keys, read from the environment:
 
-## Cost (billed to the user's Apify account)
+- `ARTIFICIALLY_API_KEY` (recommended): prepaid credits paid by card, no other account needed. If no key is set, run `python3 scripts/apify_run.py buy` and give the user the link it prints; the key is shown right after payment. `python3 scripts/apify_run.py balance` shows the remaining credit, and `buy` with a key set returns a top-up link.
+- `APIFY_TOKEN`: the user's own Apify API token (or a logged-in Apify CLI), billed by Apify instead.
 
-$0.25 per run plus $0.003 per tender saved (10-30% less per tender on paid Apify plans). 50 tenders cost about $0.40. Put one search into one run; before a job above about $2, tell the user the estimate and ask.
+## Cost (charged to the user's prepaid balance or Apify account)
+
+$0.25 per run plus $0.003 per tender saved (10-30% less per tender with a token on a paid Apify plan). 50 tenders cost about $0.40. Put one search into one run; before a job above about $2, tell the user the estimate and ask.
 
 ## How to run
 

@@ -17,25 +17,25 @@ Five [Agent Skills](https://docs.claude.com/en/docs/agents-and-tools/agent-skill
 /plugin install business-data-skills@artificially
 ```
 
-Then give the skills an Apify API token. Create a free account at [console.apify.com](https://console.apify.com/sign-up), copy the token from **Settings → API & Integrations**, and export it before starting Claude Code:
+Then give the skills a key. The simplest option is prepaid credits: buy a pack at **[artificially-data.netlify.app](https://artificially-data.netlify.app)** (card payment by Stripe, no subscription, credits never expire), copy the API key shown after payment, and export it before starting Claude Code:
 
 ```bash
-export APIFY_TOKEN=your_token_here
+export ARTIFICIALLY_API_KEY=your_key_here
 ```
 
-If you already use the Apify CLI (`apify login`), the skills pick up its token automatically.
+Already an Apify user? Set `APIFY_TOKEN` to your own [Apify API token](https://console.apify.com/settings/integrations) instead, or just stay logged in to the Apify CLI, and runs are billed by Apify.
 
 ## Use the skills elsewhere
 
-Each skill is a self-contained folder (`SKILL.md`, a reference file and a small Python runner with no dependencies). The [releases page](https://github.com/ArtificiallyLTD/claude-skills/releases) has one zip per skill for uploading to Claude apps that support custom skills. The runner needs Python 3, network access to `api.apify.com` and the `APIFY_TOKEN` environment variable, so it works best where Claude can run code with your environment, such as Claude Code or the Claude Agent SDK.
+Each skill is a self-contained folder (`SKILL.md`, a reference file and a small Python runner with no dependencies). The [releases page](https://github.com/ArtificiallyLTD/claude-skills/releases) has one zip per skill for uploading to Claude apps that support custom skills. The runner needs Python 3, network access to `artificially-data.netlify.app` (or `api.apify.com` with an Apify token) and the key in an environment variable, so it works best where Claude can run code with your environment, such as Claude Code or the Claude Agent SDK.
 
 ## What it costs
 
-The skills are free. Runs are billed by Apify to your own account at each Actor's pay-per-result price, typically a few cents to $0.40 per run plus a fraction of a cent per result (for example, 50 open SAM.gov opportunities cost about $0.36). Apify's free plan includes monthly credit for trying them out. Blocked or empty pages are never charged, and every skill tells Claude to batch inputs into one run and to ask you before any job above about $2.
+The skills are free; you pay per answer. Each data source costs a fixed amount per run (5 to 40 cents) plus a fraction of a cent per result: for example, 50 open SAM.gov opportunities cost about $0.36. The current price list is on [the credits page](https://artificially-data.netlify.app). Blocked or empty pages are never charged, every run has a hard spending cap, and every skill tells Claude to batch inputs into one run and to ask you before any job above about $2.
 
 ## How it works
 
-`scripts/apify_run.py` starts the Actor through the Apify API, waits for it, saves every result to `apify-output/<actor>-<runId>.json` in your working folder and prints a short summary for Claude. Claude then reads the saved file to sort, filter, join and summarize. Your token is only sent to `api.apify.com`.
+`scripts/apify_run.py` starts the data source through our API (or through the Apify API with your own token), waits for it, saves every result to `apify-output/<actor>-<runId>.json` in your working folder and prints a short summary for Claude. Claude then reads the saved file to sort, filter, join and summarize. Your key is only sent to the service it belongs to. `apify_run.py balance` shows your remaining credit and `apify_run.py buy` gives a top-up link.
 
 ## Responsible use
 
