@@ -1,0 +1,13 @@
+{
+  "name": "business-data-skills",
+  "description": "Business data skills for Claude: LinkedIn research, US government contracts (SAM.gov, USAspending), EU public tenders (TED), hiring signals from LinkedIn and career sites, and B2B lead lists (YC, contacts, tech stacks). Runs Apify Actors with your Apify token.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Artificially",
+    "email": "contact@artificially.io"
+  },
+  "homepage": "https://apify.com/artificially",
+  "repository": "https://github.com/ArtificiallyLTD/claude-skills",
+  "license": "MIT",
+  "keywords": ["skills", "linkedin", "government-contracts", "sam-gov", "tenders", "lead-generation", "jobs", "apify", "web-scraping"]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "artificially",
+  "description": "Business data skills for Claude by Artificially",
+  "owner": {
+    "name": "Artificially",
+    "email": "contact@artificially.io"
+  },
+  "plugins": [
+    {
+      "name": "business-data-skills",
+      "description": "LinkedIn research, US government contracts, EU public tenders, hiring signals and B2B lead lists, powered by Apify Actors.",
+      "version": "1.0.0",
+      "source": "./",
+      "author": {
+        "name": "Artificially",
+        "email": "contact@artificially.io"
+      }
+    }
+  ]
+}
