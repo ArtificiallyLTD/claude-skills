@@ -255,7 +255,7 @@ def main():
         if name == 'run':
             cmd.add_argument('actor', help='Actor name, e.g. linkedin-jobs-scraper')
             cmd.add_argument('--input', required=True, help='Input as JSON text, or @path/to/input.json')
-            cmd.add_argument('--max-charge-usd', type=float, default=5.0, help='Hard spending cap for this run in USD (default 5); the run stops when it is reached')
+            cmd.add_argument('--max-charge-usd', type=float, default=5.0, help='Hard spending cap for this run in USD, at least 1 (default 5); the run stops when it is reached')
         else:
             cmd.add_argument('run_id')
         cmd.add_argument('--max-wait', type=int, default=600, help='Seconds to wait before returning a RUNNING run (default 600)')
@@ -287,6 +287,8 @@ def main():
         return
     if args.command == 'run':
         actor = args.actor.split('/')[-1].split('~')[-1]
+        if args.max_charge_usd < 1:
+            fail('--max-charge-usd must be at least 1 (the platform minimum per run).')
         if not SAFE_NAME.match(actor):
             fail(f'Not a valid Actor name: {actor}')
         run_id = backend.start(actor, load_input(args.input), args.max_charge_usd)
