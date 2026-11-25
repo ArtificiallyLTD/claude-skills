@@ -1,6 +1,6 @@
 # Actor reference for us-government-contracts
 
-Generated from the Actors' input schemas. Pass inputs as JSON to `scripts/apify_run.py run <actor> --input ...`.
+Generated from the Actors' input schemas. Pass the input as the `input` object of the `run_data_source` tool, with the Actor name as `actor`.
 
 ## `samgov-opportunities-scraper`
 

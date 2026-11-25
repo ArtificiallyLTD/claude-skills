@@ -1,13 +1,37 @@
 {
-  "name": "business-data-skills",
-  "description": "Business data skills for Claude: LinkedIn research, US government contracts (SAM.gov, USAspending), EU public tenders (TED), hiring signals from LinkedIn and career sites, and B2B lead lists (YC, contacts, tech stacks). Runs Apify Actors with your Apify token.",
-  "version": "1.0.0",
+  "name": "artificially-data",
+  "displayName": "Artificially Data",
+  "description": "Live business data for Claude: LinkedIn research, US government contracts (SAM.gov, USAspending), EU public tenders (TED), hiring signals from LinkedIn and company career sites, and B2B lead lists (YC companies, contacts, tech stacks). Pay per answer from prepaid credits.",
+  "version": "1.1.0",
   "author": {
     "name": "Artificially",
-    "email": "contact@artificially.io"
+    "email": "contact@artificially.io",
+    "url": "https://artificially-data.netlify.app"
   },
-  "homepage": "https://apify.com/artificially",
+  "homepage": "https://artificially-data.netlify.app",
   "repository": "https://github.com/ArtificiallyLTD/claude-skills",
   "license": "MIT",
-  "keywords": ["skills", "linkedin", "government-contracts", "sam-gov", "tenders", "lead-generation", "jobs", "apify", "web-scraping"]
+  "keywords": ["linkedin", "government-contracts", "sam-gov", "tenders", "lead-generation", "jobs", "hiring", "ycombinator", "business-data"],
+  "icon": "./.claude-plugin/icon.png",
+  "documentationUrl": "https://github.com/ArtificiallyLTD/claude-skills#readme",
+  "supportUrl": "https://github.com/ArtificiallyLTD/claude-skills/issues",
+  "privacyPolicyUrl": "https://artificially-data.netlify.app/privacy.html",
+  "termsOfServiceUrl": "https://artificially-data.netlify.app/terms.html",
+  "userConfig": {
+    "api_key": {
+      "type": "string",
+      "title": "Artificially Data API key",
+      "description": "Your API key (starts with art_). Buy prepaid credits at https://artificially-data.netlify.app to get one.",
+      "sensitive": true
+    }
+  },
+  "mcpServers": {
+    "artificially-data": {
+      "type": "http",
+      "url": "https://artificially-data.netlify.app/mcp",
+      "headers": {
+        "Authorization": "Bearer ${user_config.api_key}"
+      }
+    }
+  }
 }

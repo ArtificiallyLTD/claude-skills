@@ -48,7 +48,6 @@ def actor_reference(name):
 
 
 def build():
-    shared = os.path.join(ROOT, 'shared', 'apify_run.py')
     dist = os.path.join(ROOT, 'dist')
     shutil.rmtree(dist, ignore_errors=True)
     os.makedirs(dist)
@@ -56,10 +55,8 @@ def build():
         folder = os.path.join(ROOT, 'skills', skill)
         if not os.path.exists(os.path.join(folder, 'SKILL.md')):
             sys.exit(f'{skill}: SKILL.md missing')
-        os.makedirs(os.path.join(folder, 'scripts'), exist_ok=True)
         os.makedirs(os.path.join(folder, 'references'), exist_ok=True)
-        shutil.copy2(shared, os.path.join(folder, 'scripts', 'apify_run.py'))
-        header = f'# Actor reference for {skill}\n\nGenerated from the Actors\' input schemas. Pass inputs as JSON to `scripts/apify_run.py run <actor> --input ...`.\n\n'
+        header = f'# Actor reference for {skill}\n\nGenerated from the Actors\' input schemas. Pass the input as the `input` object of the `run_data_source` tool, with the Actor name as `actor`.\n\n'
         with open(os.path.join(folder, 'references', 'actors.md'), 'w') as handle:
             handle.write(header + '\n'.join(actor_reference(a) for a in actors))
         with zipfile.ZipFile(os.path.join(dist, f'{skill}.zip'), 'w', zipfile.ZIP_DEFLATED) as archive:
